@@ -1,11 +1,8 @@
-import 'package:assignment_splash_login_signup/screens/login_page.dart';
 import 'package:assignment_splash_login_signup/screens/splash_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp()
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,9 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }

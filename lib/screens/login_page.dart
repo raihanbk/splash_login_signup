@@ -1,7 +1,9 @@
 import 'package:assignment_splash_login_signup/constants/colors.dart';
 import 'package:assignment_splash_login_signup/constants/textStyles.dart';
+import 'package:assignment_splash_login_signup/screens/signup_page.dart';
 import 'package:assignment_splash_login_signup/screens/widgets/buttons.dart';
 import 'package:assignment_splash_login_signup/screens/widgets/text_field.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,11 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: const BoxDecoration(
                         color: Colors.black,
                         borderRadius: BorderRadius.only(
-                          bottomRight: Radius.elliptical(350, 75),
-                          bottomLeft: Radius.elliptical(55, 35),
+                          bottomRight: Radius.elliptical(550, 75),
+                          bottomLeft: Radius.circular(0),
                         ),
                         image: DecorationImage(
-                            opacity: 0.7,
+                            opacity: 0.6,
                             image: AssetImage('assets/bg.png'),
                             fit: BoxFit.cover)),
                   ),
@@ -94,12 +96,43 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                           ],
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.width * 0.15,),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.width * 0.15,
+                        ),
                         buttons(context,
                             label: 'Login',
                             onPressed: () {},
-                            buttonColor: MyColors.baseColor,
-                            textColor: Colors.white)
+                            buttonColor: MyColors.buttonColor,
+                            textColor: Colors.white),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: "Don't have an account? ",
+                            style: TextStyle(
+                              color: MyColors.greyColor,
+                              fontSize: 16,
+                            ),
+                            children: [
+                              TextSpan(
+                                text: 'sign up',
+                                style: const TextStyle(
+                                    color: MyColors.baseColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => const SignUpScreen(),
+                                        ),
+                                      ),
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -114,7 +147,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 110,
                 child: Image.asset('assets/leaf1.png'),
               ),
-            )
+            ),
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.04,
+                left: MediaQuery.of(context).size.height * 0.04,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Colors.white70
+                  ),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back_ios_new, color: MyColors.baseColor)),
+                ))
           ],
         ),
       ),

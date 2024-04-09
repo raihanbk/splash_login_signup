@@ -35,7 +35,7 @@ class SplashScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const LoginScreen(),
+                    builder: (_) => const SignUpScreen(),
                   ),
                 );
               }),
@@ -52,7 +52,7 @@ class SplashScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const SignUpScreen(),
+                        builder: (_) => const LoginScreen(),
                       ),
                     );
                   }

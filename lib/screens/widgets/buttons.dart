@@ -12,7 +12,7 @@ Widget buttons(BuildContext context,
       onPressed: onPressed,
       shape: const StadiumBorder(),
       color: buttonColor,
-      height: 40,
+      height: 50,
       child: Text(
         label,
         style: TextStyle(color: textColor, fontSize: 18),
