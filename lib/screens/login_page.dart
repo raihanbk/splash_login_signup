@@ -14,9 +14,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+    bool rememberMe = false;
+
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    bool val = false;
 
     return Scaffold(
       body: Container(
@@ -57,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         textField(context,
-                            label: 'Full Name', prefixIcon: Icon(Icons.person)),
+                            label: 'email', prefixIcon: const Icon(Icons.person)),
                         const SizedBox(
                           height: 20,
                         ),
@@ -73,10 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               side: const BorderSide(),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(100)),
-                              value: val,
+                              value: rememberMe,
                               onChanged: (value) {
                                 setState(() {
-                                  val = true;
+                                  rememberMe = value!;
                                 });
                               },
                             ),

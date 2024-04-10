@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:assignment_splash_login_signup/constants/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -17,14 +15,12 @@ Widget textField(BuildContext context,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         prefixIconColor: MyColors.baseColor,
-        label: Text(
-          label,
-          style: const TextStyle(color: MyColors.baseColor, fontSize: 15),
-        ),
+        hintText: label,
+        hintStyle: TextStyle(color: MyColors.baseColor),
         enabledBorder: InputBorder.none,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: MyColors.baseColor),
+          borderSide: const BorderSide(color: MyColors.baseColor),
         ),
       ),
     ),
