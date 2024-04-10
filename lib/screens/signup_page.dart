@@ -16,7 +16,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   var formKey = GlobalKey<FormState>();
-  bool isVisible = true;
+  bool isPassVisible = true;
+  bool iscPassVisible = true;
   TextEditingController passController = TextEditingController();
 
   @override
@@ -86,8 +87,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               return null;
                             },
                             label: 'password',
-                            obscure: true,
+                            obscure: isPassVisible,
                             prefixIcon: const Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isPassVisible = !isPassVisible;
+                                });
+                              },
+                              icon: isPassVisible
+                                  ? Icon(Icons.visibility, color: MyColors.baseColor)
+                                  : Icon(Icons.visibility_off, color: MyColors.baseColor),
+                            ),
                           ),
                           const SizedBox(
                             height: 20,
@@ -102,8 +113,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               return null;
                             },
                             label: 'confirm password',
-                            obscure: true,
+                            obscure: iscPassVisible,
                             prefixIcon: const Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  iscPassVisible = !iscPassVisible;
+                                });
+                              },
+                              icon: iscPassVisible
+                                  ? Icon(Icons.visibility, color: MyColors.baseColor)
+                                  : Icon(Icons.visibility_off, color: MyColors.baseColor),
+                            ),
                           ),
                           const SizedBox(
                             height: 20,
