@@ -6,6 +6,8 @@ import 'package:assignment_splash_login_signup/screens/widgets/text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'home_page.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -14,15 +16,19 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool rememberMe = false;
 
-    bool rememberMe = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
 
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passController = TextEditingController();
+  bool isVisible = true;
+
+  var formKey = GlobalKey<FormState>();
+  var email = 'abc';
+  var pass = 'abc';
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -32,116 +38,165 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
-              child: Column(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.40,
-                    decoration: const BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.elliptical(550, 75),
-                          bottomLeft: Radius.circular(0),
-                        ),
-                        image: DecorationImage(
-                            opacity: 0.6,
-                            image: AssetImage('assets/bg.png'),
-                            fit: BoxFit.cover)),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  Text('Welcome back', style: MyTextStyles.headingStyle),
-                  Text(
-                    'Login to your account',
-                    style: MyTextStyles.subHeading,
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: Column(
-                      children: [
-                        textField(context,
-                            label: 'email', prefixIcon: const Icon(Icons.person)),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        textField(
-                          context,
-                          label: 'password',
-                          obscure: true,
-                          prefixIcon: const Icon(Icons.lock),
-                        ),
-                        Row(
-                          children: [
-                            Checkbox(
-                              side: const BorderSide(),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100)),
-                              value: rememberMe,
-                              onChanged: (value) {
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.40,
+                      decoration: const BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.elliptical(550, 75),
+                            bottomLeft: Radius.circular(0),
+                          ),
+                          image: DecorationImage(
+                              opacity: 0.6,
+                              image: AssetImage('assets/bg.png'),
+                              fit: BoxFit.cover)),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    Text('Welcome back', style: MyTextStyles.headingStyle),
+                    Text(
+                      'Login to your account',
+                      style: MyTextStyles.subHeading,
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 20),
+                      child: Column(
+                        children: [
+                          textField(context,
+                              controller: emailController,
+                              label: 'email', validator: (val) {
+                            if (val!.isEmpty || val != 'abc') {
+                              return 'invalid email';
+                            }
+                            return null;
+                          }, prefixIcon: const Icon(Icons.person)),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          textField(
+                            context,
+                            label: 'password',
+                            suffixIcon: IconButton(
+                              onPressed: () {
                                 setState(() {
-                                  rememberMe = value!;
+                                  isVisible = !isVisible;
                                 });
                               },
+                              icon: isVisible
+                                  ? const Icon(
+                                      Icons.visibility,
+                                      color: MyColors.baseColor,
+                                    )
+                                  : const Icon(
+                                      Icons.visibility_off,
+                                color: MyColors.baseColor,
+                                    ),
                             ),
-                            const Text(
-                              'Remember me',
-                              style: TextStyle(color: MyColors.baseColor),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.23,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'Forget password',
+                            validator: (val) {
+                              if (val!.isEmpty || val != 'abc') {
+                                return 'invalid password';
+                              }
+                              return null;
+                            },
+                            controller: passController,
+                            obscure: isVisible,
+                            prefixIcon: const Icon(Icons.lock),
+                          ),
+                          Row(
+                            children: [
+                              Checkbox(
+                                side: const BorderSide(),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(100)),
+                                value: rememberMe,
+                                activeColor: MyColors.baseColor,
+                                onChanged: (value) {
+                                  setState(() {
+                                    rememberMe = value!;
+                                  });
+                                },
+                              ),
+                              const Text(
+                                'Remember me',
                                 style: TextStyle(color: MyColors.baseColor),
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.15,
-                        ),
-                        buttons(context,
-                            label: 'Login',
-                            onPressed: () {},
-                            buttonColor: MyColors.buttonColor,
-                            textColor: Colors.white),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: "Don't have an account? ",
-                            style: TextStyle(
-                              color: MyColors.greyColor,
-                              fontSize: 16,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: 'sign up',
-                                style: const TextStyle(
-                                    color: MyColors.baseColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    decoration: TextDecoration.underline),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => const SignUpScreen(),
-                                        ),
-                                      ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.23,
+                              ),
+                              TextButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  'Forget password',
+                                  style: TextStyle(color: MyColors.baseColor),
+                                ),
                               )
                             ],
                           ),
-                        )
-                      ],
+                          SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.10,
+                          ),
+                          buttons(context, label: 'Login', onPressed: () {
+                            var valid = formKey.currentState!.validate();
+                            if (valid == true) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomeScreen(),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text("Login failed"),
+                                ),
+                              );
+                            }
+                          },
+                              buttonColor: MyColors.buttonColor,
+                              textColor: Colors.white),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              text: "Don't have an account? ",
+                              style: TextStyle(
+                                color: MyColors.greyColor,
+                                fontSize: 16,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'sign up',
+                                  style: const TextStyle(
+                                      color: MyColors.baseColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      decoration: TextDecoration.underline),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) =>
+                                                const SignUpScreen(),
+                                          ),
+                                        ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Positioned(
@@ -154,19 +209,19 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.04,
+                top: MediaQuery.of(context).size.height * 0.04,
                 left: MediaQuery.of(context).size.height * 0.04,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Colors.white70
-                  ),
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.white70),
                   child: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back_ios_new, color: MyColors.baseColor)),
-                ))
+                      icon: const Icon(Icons.arrow_back_ios_new,
+                          color: MyColors.baseColor)),
+                ),),
           ],
         ),
       ),
