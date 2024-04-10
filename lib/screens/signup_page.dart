@@ -15,6 +15,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  var formKey = GlobalKey<FormState>();
+  bool isVisible = true;
+  TextEditingController passController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,110 +43,157 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 40),
-                    child: Column(
-                      children: [
-                        textField(context,
-                            label: 'Full Name', prefixIcon: Icon(Icons.person)),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        textField(
-                          context,
-                          label: 'email address',
-                          obscure: true,
-                          prefixIcon: const Icon(Icons.lock),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        textField(
-                          context,
-                          label: 'password',
-                          obscure: true,
-                          prefixIcon: const Icon(Icons.lock),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        textField(
-                          context,
-                          label: 'confirm password',
-                          obscure: true,
-                          prefixIcon: const Icon(Icons.lock),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        // Text(
-                        //   'By signing you agree to our term of use and privacy notice',
-                        //   style: TextStyle(color: MyColors.baseColor),
-                        // ),
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          textField(
+                            context,
+                            validator: (name) {
+                              if (name!.isEmpty) {
+                                return 'Please enter a username';
+                              }
+                              return null;
+                            },
+                            label: 'Full Name',
+                            prefixIcon: const Icon(Icons.person),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          textField(
+                            context,
+                            validator: (email) {
+                              if (email!.isEmpty || !email.contains('@')) {
+                                return 'Enter an email address';
+                              }
+                              return null;
+                            },
+                            label: 'email address',
+                            obscure: true,
+                            prefixIcon: const Icon(Icons.lock),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          textField(
+                            context,
+                            controller: passController,
+                            validator: (pass) {
+                              if (pass!.isEmpty || pass.length < 6) {
+                                return 'Enter a password/ length should >6';
+                              }
+                              return null;
+                            },
+                            label: 'password',
+                            obscure: true,
+                            prefixIcon: const Icon(Icons.lock),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          textField(
+                            context,
+                            validator: (cPass) {
+                              if (cPass!.isEmpty ||
+                                  cPass != passController.text) {
+                                return 'Re-enter your password';
+                              }
+                              return null;
+                            },
+                            label: 'confirm password',
+                            obscure: true,
+                            prefixIcon: const Icon(Icons.lock),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          // Text(
+                          //   'By signing you agree to our term of use and privacy notice',
+                          //   style: TextStyle(color: MyColors.baseColor),
+                          // ),
 
-                        RichText(
-                          text: TextSpan(
-                            text: "By signing you agree to our ",
-                            style: TextStyle(
-                              color: MyColors.greyColor,
-                              fontSize: 16,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: 'Term of use \n '
-                                    '              and privacy notice',
-                                style: const TextStyle(
+                          RichText(
+                            text: TextSpan(
+                              text: "By signing you agree to our ",
+                              style: TextStyle(
+                                color: MyColors.greyColor,
+                                fontSize: 16,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Term of use \n '
+                                      '              and privacy notice',
+                                  style: const TextStyle(
                                     color: MyColors.baseColor,
                                     fontSize: 16,
-                                    ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => const SignUpScreen(),
-                                    ),
                                   ),
-                              )
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.15,
-                        ),
-                        buttons(context,
-                            label: 'Sign up',
-                            onPressed: () {},
-                            buttonColor: MyColors.buttonColor,
-                            textColor: Colors.white),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: "Already have an account?  ",
-                            style: TextStyle(
-                              color: MyColors.greyColor,
-                              fontSize: 16,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: 'login',
-                                style: const TextStyle(
-                                    color: MyColors.baseColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    decoration: TextDecoration.underline),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => const LoginScreen(),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) =>
+                                                const SignUpScreen(),
+                                          ),
                                         ),
-                                      ),
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
-                        )
-                      ],
+
+                          SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.15,
+                          ),
+                          buttons(context, label: 'Sign up', onPressed: () {
+                            var valid = formKey.currentState!.validate();
+                            if (valid == true) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.green,
+                                  content: Text("Registration success"),
+                                ),
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const LoginScreen(),
+                                ),
+                              );
+                            }
+                          },
+                              buttonColor: MyColors.buttonColor,
+                              textColor: Colors.white),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              text: "Already have an account?  ",
+                              style: TextStyle(
+                                color: MyColors.greyColor,
+                                fontSize: 16,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'login',
+                                  style: const TextStyle(
+                                      color: MyColors.baseColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      decoration: TextDecoration.underline),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => const LoginScreen(),
+                                          ),
+                                        ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],

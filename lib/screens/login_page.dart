@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     )
                                   : const Icon(
                                       Icons.visibility_off,
-                                color: MyColors.baseColor,
+                                      color: MyColors.baseColor,
                                     ),
                             ),
                             validator: (val) {
@@ -209,19 +209,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Positioned(
-                top: MediaQuery.of(context).size.height * 0.04,
-                left: MediaQuery.of(context).size.height * 0.04,
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: Colors.white70),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back_ios_new,
-                          color: MyColors.baseColor)),
-                ),),
+              top: MediaQuery.of(context).size.height * 0.04,
+              left: MediaQuery.of(context).size.height * 0.04,
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Colors.white70),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_new,
+                        color: MyColors.baseColor)),
+              ),
+            ),
           ],
         ),
       ),
