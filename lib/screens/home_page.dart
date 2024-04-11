@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:assignment_splash_login_signup/widgets/appBar_home.dart';
 import 'package:flutter/material.dart';
 
 import '../model/home_model.dart';
@@ -23,23 +24,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 18.0, top: 10),
-          child: Icon(Icons.settings_outlined,color: Colors.grey,size: 30,),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 18.0, top: 10),
-            child: CircleAvatar(backgroundColor: Color(0xFF88AEBA),child: Icon(Icons.add)),
-          )
-        ],
-      ),
+      appBar: appBar(),
         body: Container(
-          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           width: MediaQuery.of(context).size.width,
           height: 150,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.lightGreen
           ),
           child: ListView(
