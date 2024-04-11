@@ -1,8 +1,8 @@
 import 'package:assignment_splash_login_signup/constants/colors.dart';
 import 'package:assignment_splash_login_signup/constants/textStyles.dart';
 import 'package:assignment_splash_login_signup/screens/signup_page.dart';
-import 'package:assignment_splash_login_signup/screens/widgets/buttons.dart';
-import 'package:assignment_splash_login_signup/screens/widgets/text_field.dart';
+import 'package:assignment_splash_login_signup/widgets/buttons.dart';
+import 'package:assignment_splash_login_signup/widgets/text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

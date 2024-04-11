@@ -1,6 +1,6 @@
 import 'package:assignment_splash_login_signup/screens/login_page.dart';
-import 'package:assignment_splash_login_signup/screens/widgets/buttons.dart';
-import 'package:assignment_splash_login_signup/screens/widgets/text_field.dart';
+import 'package:assignment_splash_login_signup/widgets/buttons.dart';
+import 'package:assignment_splash_login_signup/widgets/text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +71,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               return null;
                             },
                             label: 'email address',
-                            obscure: true,
                             prefixIcon: const Icon(Icons.lock),
                           ),
                           const SizedBox(

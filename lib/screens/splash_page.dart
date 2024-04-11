@@ -1,6 +1,6 @@
 import 'package:assignment_splash_login_signup/screens/login_page.dart';
 import 'package:assignment_splash_login_signup/screens/signup_page.dart';
-import 'package:assignment_splash_login_signup/screens/widgets/buttons.dart';
+import 'package:assignment_splash_login_signup/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
