@@ -6,6 +6,9 @@ class MyTextStyles {
   static TextStyle headingStyle = GoogleFonts.cabin(
       fontSize: 40, fontWeight: FontWeight.bold, color: MyColors.baseColor);
 
+  static TextStyle headingStyle1 = GoogleFonts.cabin(
+      fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
+
   static TextStyle subHeading = GoogleFonts.aBeeZee(
       fontSize: 18, color: MyColors.greyColor);
 }

@@ -9,7 +9,7 @@ PreferredSizeWidget appBar() {
     actions: const [
       Padding(
         padding: EdgeInsets.only(right: 18.0, top: 10),
-        child: CircleAvatar(backgroundColor: Color(0xFF88AEBA),child: Icon(Icons.add)),
+        child: CircleAvatar(backgroundColor: Color(0xFF88AEBA),child: Icon(Icons.add, color: Colors.white,)),
       )
     ],
   );

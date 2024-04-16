@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 
 List<Map<String, dynamic>> homeModel = [
   {
-    'img': '',
+    'img': 'assets/apple.png',
     'title': 'Apple',
     'subtitle': '250 ml',
   },
   {
-    'img': '',
+    'img': 'assets/orange.png',
     'title': 'Orange',
     'subtitle': '500 ml',
   },
   {
-    'img': '',
+    'img': 'assets/pineApple.png',
     'title': 'PineApple',
     'subtitle': '450 ml',
   },
   {
-    'img': '',
+    'img': 'assets/banana.png',
     'title': 'Banana',
     'subtitle': '480 ml',
   }

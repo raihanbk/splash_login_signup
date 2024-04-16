@@ -1,3 +1,4 @@
+import 'package:assignment_splash_login_signup/screens/home_page.dart';
 import 'package:assignment_splash_login_signup/screens/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: HomeScreen(),
     );
   }
 }
